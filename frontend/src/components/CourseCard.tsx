@@ -19,9 +19,20 @@ const CourseCard: React.FC<CourseCardProps> = ({ course, isSelected, onSelect })
             className={`course-card ${isSelected ? 'selected' : ''}`}
         >
             <div className="course-header">
-                <h3 className="course-name">{course.name}</h3>
-                <span className="course-code">{course.courseCode}</span>
+                <div className="course-title-row">
+                    <h3 className="course-name">{course.name}</h3>
+                    <span className="course-code">{course.courseCode}</span>
+                </div>
+                {course.credits && (
+                    <span className="course-credits">{course.credits} Credits</span>
+                )}
             </div>
+
+            {course.description && (
+                <div className="course-description">
+                    <p>{course.description}</p>
+                </div>
+            )}
 
             {course.schedule && course.schedule.length > 0 && (
                 <div className="schedule-section">
@@ -54,7 +65,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course, isSelected, onSelect })
                         {course.faculty.map((member) => (
                             <div key={member.id} className="faculty-item">
                                 <span className="faculty-name">
-                                    {member.firstName} {member.lastName}
+                                    {member.title ? `${member.title} ` : ''}{member.firstName} {member.lastName}
                                 </span>
                                 <span className="faculty-email">{member.email}</span>
                             </div>
