@@ -1,18 +1,20 @@
 -- Insert Domains
-INSERT INTO domains (program) VALUES
-('MTech CSE'),
-('MTech ECE'),
-('MTech AIDS');
+INSERT INTO domains (program, batch, capacity) VALUES
+('MTech CSE', '2025-27', 150),
+('MTech ECE', '2025-27', 100),
+('MTech AIDS', '2025-27', 100);
+
 
 -- Insert Courses
-INSERT INTO Courses (name, course_code) VALUES
-('Advanced Algorithms', 'CSE511'),
-('Machine Learning', 'AIT511'),
-('Maths for Machine Learning', 'AIT512'),
-('Digital Signal Processing', 'ECE501'),
-('Deep Learning', 'AIT513'),
-('Systems Software', 'CSE513-A'),
-('Enterprise Software Development', 'CSE513-B');
+INSERT INTO Courses (name, course_code, capacity, credits, term, year) VALUES
+('Advanced Algorithms', 'CSE511', 150, 4, 'Term I', '2025-26'),
+('Machine Learning', 'AIT511', 50, 4, 'Term I', '2025-26'),
+('Maths for Machine Learning', 'AIT512', 100, 4, 'Term I', '2025-26'),
+('Digital Signal Processing', 'ECE501', 50, 4, 'Term I', '2025-26'),
+('Deep Learning', 'AIT513', 50, 4, 'Term I', '2025-26'),
+('Systems Software', 'CSE513-A', 150, 4, 'Term I', '2025-26'),
+('Enterprise Software Development', 'CSE513-B', 150, 4, 'Term I', '2025-26');
+
 
 
 -- Link Courses to Domains (Course_Domain)
