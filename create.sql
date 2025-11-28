@@ -1,14 +1,22 @@
 -- Domains table
 CREATE TABLE Domains (
     domain_id INT PRIMARY KEY AUTO_INCREMENT,
-    program VARCHAR(100) NOT NULL
+    program VARCHAR(100) NOT NULL,
+    batch VARCHAR(50),
+    capacity INT,
+    qualification VARCHAR(100)
 );
 
 -- Courses table
 CREATE TABLE Courses (
     course_id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL,
-    course_code VARCHAR(20) NOT NULL
+    course_code VARCHAR(20) NOT NULL,
+    description TEXT,
+    year VARCHAR(50),
+    term VARCHAR(50),
+    credits INT,
+    capacity INT
 );
 
 -- Course_Domain (many-to-many between Courses and Domains)
@@ -36,7 +44,9 @@ CREATE TABLE Employees (
     employee_id INT PRIMARY KEY AUTO_INCREMENT,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
-    email VARCHAR(100)
+    email VARCHAR(100),
+    title VARCHAR(50),
+    photograph_path VARCHAR(255)
 );
 
 -- Faculty_Courses (many-to-many between Employees and Courses)
@@ -54,7 +64,11 @@ CREATE TABLE Students (
     roll_number VARCHAR(20) NOT NULL,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
-    email VARCHAR(100)
+    email VARCHAR(100),
+    photograph_path VARCHAR(255),
+    cgpa DOUBLE,
+    total_credits INT,
+    graduation_year INT
 );
 
 -- Student_Courses (many-to-many between Students and Courses)
