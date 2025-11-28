@@ -26,39 +26,44 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Course {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "course_id")
-    private Long id;
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Column(name = "course_id")
+        private Long id;
 
-    @Column(nullable = false)
-    private String name;
+        @Column(nullable = false)
+        private String name;
 
-    @Column(name = "course_code", nullable = false)
-    private String courseCode;
+        @Column(name = "course_code", nullable = false)
+        private String courseCode;
 
-    @ManyToMany
-    @JoinTable(
-            name = "Course_Domain",
-            joinColumns = @JoinColumn(name = "course_id"),
-            inverseJoinColumns = @JoinColumn(name = "domain_id"))
-    private Set<Domain> domains = new LinkedHashSet<>();
+        @Column(name = "description")
+        private String description;
 
-    @ManyToMany
-    @JoinTable(
-            name = "Faculty_Courses",
-            joinColumns = @JoinColumn(name = "course_id"),
-            inverseJoinColumns = @JoinColumn(name = "faculty"))
-    private Set<Employee> facultyMembers = new LinkedHashSet<>();
+        @Column(name = "year")
+        private Integer year;
 
-    @ManyToMany
-    @JoinTable(
-            name = "Student_Courses",
-            joinColumns = @JoinColumn(name = "course_id"),
-            inverseJoinColumns = @JoinColumn(name = "student_id"))
-    private Set<Student> students = new LinkedHashSet<>();
+        @Column(name = "term")
+        private String term;
 
-    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CourseSchedule> courseSchedules = new ArrayList<>();
+        @Column(name = "credits")
+        private Integer credits;
+
+        @Column(name = "capacity")
+        private Integer capacity;
+
+        @ManyToMany
+        @JoinTable(name = "Course_Domain", joinColumns = @JoinColumn(name = "course_id"), inverseJoinColumns = @JoinColumn(name = "domain_id"))
+        private Set<Domain> domains = new LinkedHashSet<>();
+
+        @ManyToMany
+        @JoinTable(name = "Faculty_Courses", joinColumns = @JoinColumn(name = "course_id"), inverseJoinColumns = @JoinColumn(name = "faculty"))
+        private Set<Employee> facultyMembers = new LinkedHashSet<>();
+
+        @ManyToMany
+        @JoinTable(name = "Student_Courses", joinColumns = @JoinColumn(name = "course_id"), inverseJoinColumns = @JoinColumn(name = "student_id"))
+        private Set<Student> students = new LinkedHashSet<>();
+
+        @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
+        private List<CourseSchedule> courseSchedules = new ArrayList<>();
 }
-
