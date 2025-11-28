@@ -112,17 +112,7 @@
   margin-bottom: 0.5rem;
 }
 
-.course-credits {
-  background: #f1f5f9;
-  color: var(--text-secondary);
-  padding: 0.25rem 0.6rem;
-  border-radius: 6px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  border: 1px solid #e2e8f0;
-}
+
 
 .course-description {
   margin-bottom: 1.5rem;
