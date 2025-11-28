@@ -33,7 +33,12 @@ public class Employee {
 
     private String email;
 
+    @Column(name = "title")
+    private String title;
+
+    @Column(name = "photograph_path")
+    private String photographPath;
+
     @ManyToMany(mappedBy = "facultyMembers")
     private Set<Course> courses = new LinkedHashSet<>();
 }
-
