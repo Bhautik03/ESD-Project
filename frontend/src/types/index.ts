@@ -17,12 +17,15 @@ export interface FacultyDto {
   firstName: string;
   lastName: string;
   email: string;
+  title?: string;
 }
 
 export interface CourseWithScheduleDto {
   id: number;
   name: string;
   courseCode: string;
+  description?: string;
+  credits?: number;
   schedule: CourseScheduleDto[];
   faculty: FacultyDto[];
 }
@@ -39,6 +42,9 @@ export interface StudentDto {
   firstName: string;
   lastName: string;
   email: string;
+  cgpa?: number;
+  totalCredits?: number;
+  graduationYear?: number;
 }
 
 export interface CourseStudentsResponse {
