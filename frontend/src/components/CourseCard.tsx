@@ -23,9 +23,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course, isSelected, onSelect })
                     <h3 className="course-name">{course.name}</h3>
                     <span className="course-code">{course.courseCode}</span>
                 </div>
-                {course.credits && (
-                    <span className="course-credits">{course.credits} Credits</span>
-                )}
+
             </div>
 
             {course.description && (
