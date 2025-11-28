@@ -36,7 +36,18 @@ public class Student {
 
     private String email;
 
+    @Column(name = "photograph_path")
+    private String photographPath;
+
+    @Column(name = "cgpa")
+    private Double cgpa;
+
+    @Column(name = "total_credits")
+    private Integer totalCredits;
+
+    @Column(name = "graduation_year")
+    private Integer graduationYear;
+
     @ManyToMany(mappedBy = "students")
     private Set<Course> courses = new LinkedHashSet<>();
 }
-
