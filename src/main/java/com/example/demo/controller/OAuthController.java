@@ -53,18 +53,18 @@ public class OAuthController {
             @RequestParam(value = "error_description", required = false) String errorDescription,
             HttpServletRequest request,
             HttpServletResponse response) {
-        
+
         // Handle OAuth errors (user cancelled, access denied, etc.)
         if (error != null) {
             String errorMsg = "access_denied".equals(error) ? "cancelled" : error;
             return new RedirectView("http://localhost:3000?error=" + errorMsg);
         }
-        
+
         // Handle missing authorization code
         if (code == null || code.isEmpty()) {
             return new RedirectView("http://localhost:3000?error=no_code");
         }
-        
+
         try {
             GoogleTokenResponse tokens = tokenService.exchangeCode(code);
 
@@ -80,14 +80,14 @@ public class OAuthController {
 
             // Get or create session
             HttpSession session = request.getSession(true);
-            // Store access token and refresh token in session
+            // Store access token, refresh token, and id_token in session
             session.setAttribute("access_token", tokens.getAccess_token());
+            session.setAttribute("id_token", tokens.getId_token());
             if (tokens.getRefresh_token() != null) {
                 session.setAttribute("refresh_token", tokens.getRefresh_token());
             }
-            
+
             // Mark session as authenticated and store server startup time
-            // This allows us to detect if server was restarted
             session.setAttribute("authenticated", true);
             session.setAttribute("serverStartupTime", com.example.demo.config.StartupListener.getServerStartupTime());
 
@@ -134,36 +134,35 @@ public class OAuthController {
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("authenticated") == null) {
             // Session doesn't exist or wasn't authenticated
-            clearIdTokenCookie(request, response);
             return false;
         }
-        
+
         // Check if server was restarted by comparing startup timestamps
         Long sessionStartupTime = (Long) session.getAttribute("serverStartupTime");
         long currentServerStartupTime = com.example.demo.config.StartupListener.getServerStartupTime();
-        
+
         if (sessionStartupTime == null || sessionStartupTime.longValue() != currentServerStartupTime) {
             // Server was restarted - invalidate session and clear cookies
             session.invalidate();
             clearIdTokenCookie(request, response);
             return false;
         }
-        
+
         // Session exists and is authenticated, now validate the ID token
         String idToken = tokenService.getIdTokenFromCookie(request);
         if (idToken == null) {
             // Try session as fallback
             idToken = tokenService.getIdTokenFromSession(session);
         }
-        
+
         if (idToken == null) {
             return false;
         }
-        
+
         // Validate token with Google
         return tokenService.validateIdToken(idToken);
     }
-    
+
     private void clearIdTokenCookie(HttpServletRequest request, HttpServletResponse response) {
         String idToken = tokenService.getIdTokenFromCookie(request);
         if (idToken != null) {
