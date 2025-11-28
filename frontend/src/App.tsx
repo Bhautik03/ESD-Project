@@ -12,11 +12,11 @@ function App(): JSX.Element {
     // Check for error parameters in URL (from OAuth callback)
     const urlParams = new URLSearchParams(window.location.search);
     const errorParam = urlParams.get('error');
-    
+
     if (errorParam) {
       // Clear the error from URL
       window.history.replaceState({}, document.title, window.location.pathname);
-      
+
       // Set appropriate error message
       switch (errorParam) {
         case 'cancelled':
@@ -42,17 +42,17 @@ function App(): JSX.Element {
       setLoading(false);
       return;
     }
-    
+
     // Check if authenticated flag is set (successful login)
     if (urlParams.get('authenticated') === 'true') {
       window.history.replaceState({}, document.title, window.location.pathname);
       // Add a delay to ensure cookies are set before checking auth status
       setTimeout(() => {
         checkAuthStatus();
-      }, 300);
+      }, 500);
       return;
     }
-    
+
     checkAuthStatus();
   }, []);
 
@@ -65,14 +65,14 @@ function App(): JSX.Element {
           'Content-Type': 'application/json',
         },
       });
-      
+
       if (!response.ok) {
         throw new Error('Auth check failed');
       }
-      
+
       const isAuth = await response.json();
       setIsAuthenticated(isAuth);
-      
+
       // If not authenticated and we haven't retried, try once more after a short delay
       if (!isAuth && retryCount === 0) {
         setTimeout(() => {
@@ -80,7 +80,7 @@ function App(): JSX.Element {
         }, 500);
         return;
       }
-      
+
       // Only set loading to false if we're done (either authenticated or retried)
       if (isAuth || retryCount > 0) {
         setLoading(false);
@@ -128,7 +128,7 @@ function App(): JSX.Element {
             <p>{error}</p>
           </div>
           <div className="login-content">
-            <button 
+            <button
               onClick={handleRetryLogin}
               className="google-login-btn"
             >
