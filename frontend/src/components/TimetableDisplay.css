@@ -104,6 +104,39 @@
   margin-right: 1rem;
 }
 
+.course-title-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.course-credits {
+  background: #f1f5f9;
+  color: var(--text-secondary);
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 1px solid #e2e8f0;
+}
+
+.course-description {
+  margin-bottom: 1.5rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  padding-bottom: 1rem;
+  border-bottom: 1px dashed #e2e8f0;
+}
+
+.course-description p {
+  margin: 0;
+}
+
 .course-code {
   background: linear-gradient(135deg, var(--primary-color), #818cf8);
   color: white;
