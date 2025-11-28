@@ -1,0 +1,108 @@
+.domain-selector h2 {
+  margin-bottom: 1.5rem;
+  background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border: none;
+  padding-bottom: 0;
+  padding-left: 1rem;
+  border-left: 4px solid var(--accent-color);
+}
+
+.domain-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.domain-button {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.125rem 1.25rem;
+  border: none;
+  border-radius: var(--border-radius);
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 1rem;
+  text-align: left;
+  width: 100%;
+  color: var(--text-secondary);
+  font-weight: 600;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.domain-button::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 4px;
+  background: linear-gradient(to bottom, var(--primary-color), var(--accent-color));
+  opacity: 0.5;
+  transition: width 0.3s ease;
+}
+
+.domain-button:hover:not(:disabled) {
+  transform: translateX(5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  color: var(--primary-color);
+}
+
+.domain-button:hover::before {
+  width: 6px;
+  opacity: 1;
+}
+
+.domain-button.active {
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+  color: white;
+  box-shadow: 0 8px 20px rgba(79, 70, 229, 0.4);
+}
+
+.domain-button.active::before {
+  display: none;
+}
+
+.domain-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: #f1f5f9;
+}
+
+.domain-icon {
+  font-size: 1.25rem;
+  opacity: 0.9;
+  transition: transform 0.3s;
+}
+
+.domain-button:hover .domain-icon {
+  transform: scale(1.2) rotate(5deg);
+}
+
+.domain-button.active .domain-icon {
+  opacity: 1;
+  color: white;
+}
+
+.domain-name {
+  font-weight: inherit;
+}
+
+.loading-text,
+.no-domains {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  font-size: 0.9rem;
+}
