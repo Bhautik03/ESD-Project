@@ -28,7 +28,15 @@ public class Domain {
     @Column(nullable = false)
     private String program;
 
+    @Column(name = "batch")
+    private String batch;
+
+    @Column(name = "capacity")
+    private Integer capacity;
+
+    @Column(name = "qualification")
+    private String qualification;
+
     @ManyToMany(mappedBy = "domains")
     private Set<Course> courses = new LinkedHashSet<>();
 }
-
